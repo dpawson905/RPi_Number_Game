@@ -8,6 +8,8 @@ will trigger a light the same as guessing
 high and correctly.  Also a buzzer will sound
 after 10 incorrect guesses or if the user gets
 the random number"""
+# Import the os module
+import os
 # Import the randint function from the random module
 from random import randint
 # Import the sys module for exiting the application
@@ -39,6 +41,13 @@ USER_TRYS = 0
 # Get users name
 USER_NAME = str(input("Hello, what is your name player?: "))
 
+# Adding a delay print function to add more fluff to the game
+def delay_print(s):
+    """Delayed print function"""
+    for c in s:
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(0.025)
 
 def main():
     """This function starts the game and asks the player if they want to play.
@@ -66,11 +75,43 @@ def end_game():
 
 def start_game():
     """Core code for the game"""
-    print("Hello")
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("Well %s I'm glad you've decided to play!" %USER_NAME)
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("Here's how the game works...")
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("I am going to guess a number between 1 and 100...")
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("and you are going to guess that number.")
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("You have 10 tries to guess the correct number...")
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("If your guess is too high, the Red LED will light up...")
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("If your guess is too low, the Yellow LED will light up...")
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("If your guess is the same as my number, the Green LED will light...")
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("And the buzzer will go off!")
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("And remember... If you cannot guess my number within 10 tries...")
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("The game is over and all the lights will flash and the buzzer will sound.")
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    delay_print("With that being said... Let's play %s" %USER_NAME)
 
 if __name__ == "__main__":
     main()
 
-RANDOM_NUMBER = randint(1, 10)
-print(RANDOM_NUMBER)
 GPIO.cleanup()
