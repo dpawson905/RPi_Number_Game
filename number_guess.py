@@ -8,16 +8,15 @@ will trigger a light the same as guessing
 high and correctly.  Also a buzzer will sound
 after 10 incorrect guesses or if the user gets
 the random number"""
-# Import the os module
+
+# Import required modules
 import os
-# Import the randint function from the random module
-from random import randint
-# Import the sys module for exiting the application
 import sys
+import time
+import random
+
 # Import the GPIO module
 import RPi.GPIO as GPIO
-# Import the time module
-import time
 
 # Configure the Pi to use the BCM pin numbers
 GPIO.setmode(GPIO.BCM)
@@ -27,13 +26,14 @@ RED_LED = 23
 YELLOW_LED = 24
 GREEN_LED = 25
 GAME_BUZZER = 21
+led_list = [RED_LED, YELLOW_LED, GREEN_LED]
 GPIO.setup(RED_LED, GPIO.OUT)
 GPIO.setup(YELLOW_LED, GPIO.OUT)
 GPIO.setup(GREEN_LED, GPIO.OUT)
 GPIO.setup(GAME_BUZZER, GPIO.OUT)
 
 # Configure the random number
-RANDOM_NUMBER = randint(1, 100)
+RANDOM_NUMBER = random.randint(1, 100)
 
 # Setup attempts | User gets 10 trys to guess the correct number
 USER_TRYS = 0
@@ -42,10 +42,10 @@ USER_TRYS = 0
 USER_NAME = str(input("Hello, what is your name player?: "))
 
 # Adding a delay print function to add more fluff to the game
-def delay_print(s):
+def delay_print(string):
     """Delayed print function"""
-    for c in s:
-        sys.stdout.write(c)
+    for char in string:
+        sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(0.025)
 
@@ -75,41 +75,39 @@ def end_game():
 
 def start_game():
     """Core code for the game"""
+    # Flash lights for the duration of the messages
+    t_end = time.time() + 60 / 6
+    while time.time() < t_end:
+        ON_TIME = random.uniform(0, .025)
+        led = random.choice(led_list)
+        GPIO.output(led, True)
+        time.sleep(ON_TIME)
+        GPIO.output(led, False)
+
     os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("Well %s I'm glad you've decided to play!" %USER_NAME)
+    delay_print("Well %s I'm glad you've decided to play!\n" %USER_NAME)
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("Here's how the game works...")
+    delay_print("Here's how the game works...\n")
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("I am going to guess a number between 1 and 100...")
+    delay_print("I am going to guess a number between 1 and 100...\n")
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("and you are going to guess that number.")
+    delay_print("and you are going to guess that number.\n")
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("You have 10 tries to guess the correct number...")
+    delay_print("You have 10 tries to guess the correct number...\n")
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("If your guess is too high, the Red LED will light up...")
+    delay_print("If your guess is too high, the Red LED will light up...\n")
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("If your guess is too low, the Yellow LED will light up...")
+    delay_print("If your guess is too low, the Yellow LED will light up...\n")
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("If your guess is the same as my number, the Green LED will light...")
+    delay_print("If your guess is the same as my number, the Green LED will light...\n")
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("And the buzzer will go off!")
+    delay_print("And the buzzer will go off!\n")
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("And remember... If you cannot guess my number within 10 tries...")
+    delay_print("And remember... If you cannot guess my number within 10 tries...\n")
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("The game is over and all the lights will flash and the buzzer will sound.")
+    delay_print("The game is over and all the lights will flash and the buzzer will sound.\n")
     time.sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    delay_print("With that being said... Let's play %s" %USER_NAME)
+    delay_print("With that being said... Let's play %s\n" %USER_NAME)
 
 if __name__ == "__main__":
     main()
