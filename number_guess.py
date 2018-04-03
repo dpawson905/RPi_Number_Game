@@ -42,7 +42,7 @@ USER_NAME = str(input("Hello, what is your name player?: "))
 
 def main():
     """This function starts the game and asks the player if they want to play.
-    If the user types y or yes then the game calls the main function.
+    If the user types y or yes then the game calls the start_game function.
     If the user selects n or no then the game calles the end_game function"""
 
     # Ask the user if they want to play
