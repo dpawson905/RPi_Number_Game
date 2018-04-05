@@ -114,10 +114,10 @@ def start_game():
     delay_print("With that being said... Let's play %s\n" %USER_NAME)
 
     # Setup attempts | User gets 10 trys to guess the correct number
-    user_tries = 0
+    user_tries = 1
     total_tries = 10
 
-    while user_tries <= 10:
+    while user_tries <= total_tries:
         tries_left = total_tries - user_tries
         player = int(input("%s please pick a number between 1 and 100: " %USER_NAME))
         if player < RANDOM_NUMBER:
@@ -144,7 +144,7 @@ def start_game():
         else:
             print("Enter a valid number!")
 
-        if user_tries == total_tries:
+        if user_tries > total_tries:
             print("You lost, you didnt guess the number in time, the number was %i." %RANDOM_NUMBER)
             GPIO.output(GAME_LOST, True)
             time.sleep(5)
