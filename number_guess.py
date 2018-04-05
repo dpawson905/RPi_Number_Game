@@ -128,10 +128,9 @@ try:
         # Setup attempts | User gets 10 trys to guess the correct number
         user_tries = 1
         total_tries = 10
-        tries_left = total_tries - user_tries
-        
+
         while user_tries <= total_tries:
-            
+            tries_left = total_tries - user_tries
             player = int(
                 input("%s please pick a number between 1 and 100: " % USER_NAME))
             if player < 1 or player > 100:
